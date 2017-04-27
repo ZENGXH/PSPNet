@@ -7,17 +7,17 @@ modify variable 'gpu_id_array' if needed.
 close all; clc; clear;
 addpath('../matlab'); %add matcaffe path
 addpath('visualizationCode');
-data_name = 'ADE20K'; %set to 'VOC2012' or 'cityscapes' for relevant datasets
+data_name = 'cityscapes'; % ''ADE20K'; %set to 'VOC2012' or 'cityscapes' for relevant datasets
 
 switch data_name
     case 'ADE20K'
         isVal = true; %evaluation on valset
         step = 500; %equals to number of images divide num of GPUs in testing e.g. 500=2000/4
-        data_root = '/data2/hszhao/dataset/ADEChallengeData2016'; %root path of dataset
+        data_root = '~/Downloads/leftImg8bit_trainvaltest/leftImg8bit'; %root path of dataset
         eval_list = 'list/ADE20K_val.txt'; %evaluation list, refer to lists in folder 'samplelist'
-        save_root = 'mc_result/ADE20K/val/pspnet50_473/'; %root path to store the result image
-        model_weights = 'model/pspnet50_ADE20K.caffemodel';
-        model_deploy = 'prototxt/pspnet50_ADE20K_473.prototxt';
+        save_root = './output'; %root path to store the result image
+        model_weights = '~/Downloads/pspnet101_cityscapes.caffemodel';
+        model_deploy = 'prototxt/pspnet101_cityscapes_713.prototxt';
         fea_cha = 150; %number of classes
         base_size = 512; %based size for scaling
         crop_size = 473; %crop size fed into network
@@ -39,10 +39,10 @@ switch data_name
     case 'cityscapes'
         isVal = true;
         step = 125; %125=500/4
-        data_root = '/data2/hszhao/dataset/cityscapes';
-        eval_list = 'list/cityscapes_val.txt';
+        data_root = '~/Downloads/leftImg8bit_trainvaltest/leftImg8bit';
+        eval_list = 'samplelist/cityscapes_val.txt';
         save_root = 'mc_result/cityscapes/val/pspnet101_713/';
-        model_weights = 'model/pspnet101_cityscapes.caffemodel';
+        model_weights = '~/Downloads/pspnet101_cityscapes.caffemodel';
         model_deploy = 'prototxt/pspnet101_cityscapes_713.prototxt';
         fea_cha = 19;
         base_size = 2048;

@@ -404,7 +404,40 @@ message LayerParameter {
   optional TileParameter tile_param = 138;
   optional UniqueLabelParameter unique_label_param = 150;
   optional WindowDataParameter window_data_param = 129;
+
+  // add xh, for seg
+  optional FSEGTransformationParameter fseg_transform_param = 160;
+  optional FSEGDataParameter fseg_data_param = 161;
 }
+// add xh, for seg
+message FSEGDataParameter{
+    // Specify the batch size
+    optional uint32 batch_size = 1; 
+    // Specify the root folder to read the data
+    optional string root_folder = 3;
+    // Specify the sources list file
+    repeated string source = 4;
+    optional bool shuffle = 5;
+    optional bool is_color = 6 [default = true];
+    enum LabelType {
+      IMAGE = 0;
+      PIXEL = 1;
+      NONE = 2;
+    }
+    optional LabelType label_type = 7 [default = IMAGE];
+}
+message FSEGTransformationParameter{
+    optional uint32 crop_size_x = 1 [default = 300];
+    optional uint32 crop_size_y = 2 [default = 300];
+    optional uint32 new_height = 3 [default = 300];
+    optional uint32 new_width = 4 [default = 300];
+    repeated uint32 mean_value = 5;
+    optional bool visualize = 6 [default = false];
+    optional float scale_max = 7 [default = 1];
+    optional float scale_min = 8 [default = 1];
+    optional uint32 ignore_label = 9 [default = 0];
+    optional float max_rotate_degree = 10 [default = 0];
+    }
 
 // Message that stores parameters used to apply transformation
 // to the data layer's data

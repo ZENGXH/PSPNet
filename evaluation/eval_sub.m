@@ -1,6 +1,8 @@
 function eval_sub(data_name,data_root,eval_list,model_weights,model_deploy,fea_cha,base_size,crop_size,data_class,data_colormap, ...
 		  is_save_feat,save_gray_folder,save_color_folder,save_feat_folder,gpu_id,index,step,skipsize,scale_array,mean_r,mean_g,mean_b)
-list = importdata(fullfile(data_root,eval_list));
+%list = importdata(fullfile(data_root,eval_list));
+list = importdata(fullfile(eval_list));
+
 load(data_class);
 load(data_colormap);
 if(~isdir(save_gray_folder))
